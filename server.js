@@ -7,6 +7,7 @@ const apiRoutes = express.Router();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const serverHelper = require('./server-helper');
 
 const jwt = require('jsonwebtoken');
 const config = require('./config');
@@ -56,7 +57,7 @@ apiRoutes.post('/authenticate', (req, res) => {
     } else if(user) {
 
       //check if password matches
-      if(user.password !== req.body.password) {
+      if(serverHelper.bcryptValidPassword(user.password, req.body.password)) {
         res.json({success: false, message: 'Authentication failed. Wrong password.'});      
       } else {
         // if user is found and password is right
@@ -78,6 +79,21 @@ apiRoutes.post('/authenticate', (req, res) => {
   });
 });
 
+apiRoutes.get('/setup', (req, res) => {
+  const user = new User({
+    name: 'Yuchao Wu', 
+    password: serverHelper.bcryptGenerateHash('password'),
+    admin: true 
+  });
+
+  user.save((err) => {
+    if (err) throw err;
+
+    console.log('User saved successfully');
+    res.json({ success: true });
+  });
+});
+
 // route middleware to verify a token
 apiRoutes.use((req, res, next) => {
   
@@ -89,7 +105,7 @@ apiRoutes.use((req, res, next) => {
     // verifies secret and checks exp
     jwt.verify(token, app.get('superSecret'), (err, decoded) => {
       if(err) {
-        return res.json({success: false, message: 'Failed to authenticate token.'});
+        return res.json({success: false, message: 'Failed to authenticate token.', error: err});
       } else {
         // if everything is good, save to request for use in other routes
         req.decoded = decoded;
