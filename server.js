@@ -13,6 +13,8 @@ const jwt = require('jsonwebtoken');
 const config = require('./config');
 const User = require('./app/models/user');
 
+const product_controller = require('./app/controllers/productController');
+
 // =======================
 // configuration =========
 // =======================
@@ -55,7 +57,7 @@ apiRoutes.post('/authenticate', (req, res) => {
     if(!user) {
       res.json({success: false, message: 'Authentication failed. User not found.'});
     } else if(user) {
-
+      
       //check if password matches
       if(!serverHelper.bcryptValidPassword(req.body.password, user.password)) {
         res.json({success: false, message: 'Authentication failed. Wrong password.'});      
@@ -128,6 +130,18 @@ apiRoutes.get('/users', (req, res) => {
     res.json(users);
   });
 });
+
+/* POST request for creating Product. */
+apiRoutes.post('/product/create', product_controller.createProduct);
+
+/* GET request for getting all Product. */
+apiRoutes.get('/product/all', product_controller.getAllProducts);
+
+/* PUT request for editing a Product. */
+apiRoutes.put('/product/:id/edit', product_controller.editProduct);
+
+/* GET request for removing a Product. */
+apiRoutes.get('/product/:id/delete', product_controller.removeProduct);
 
 app.use('/api', apiRoutes);
 
