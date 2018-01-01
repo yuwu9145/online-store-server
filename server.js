@@ -57,7 +57,7 @@ apiRoutes.post('/authenticate', (req, res) => {
     } else if(user) {
 
       //check if password matches
-      if(serverHelper.bcryptValidPassword(user.password, req.body.password)) {
+      if(!serverHelper.bcryptValidPassword(req.body.password, user.password)) {
         res.json({success: false, message: 'Authentication failed. Wrong password.'});      
       } else {
         // if user is found and password is right
