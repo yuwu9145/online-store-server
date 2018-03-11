@@ -141,13 +141,12 @@ apiRoutes.get('/product/all', product_controller.getAllProducts);
 apiRoutes.put('/product/:id/edit', product_controller.editProduct);
 
 /* GET request for removing a Product. */
-apiRoutes.get('/product/:id/delete', product_controller.removeProduct);
+apiRoutes.delete('/product/:id/delete', product_controller.removeProduct);
 
 app.use('/api', apiRoutes);
 
 
 // API ROUTES -------------------
-// we'll get to these in a second
 
 // =======================
 // start the server ======
