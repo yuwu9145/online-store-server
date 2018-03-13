@@ -16,11 +16,11 @@ exports.createProduct = (req, res) => {
 
   Product.create(product,  (err, instance) => {
     if (err) {
-      res.json({success: false, instance: null, error: err});
+      res.json(null);
       return;
     };
     // saved!
-    res.json({success: true, instance: instance});
+    res.json(instance);
   });
 };
 
@@ -28,11 +28,11 @@ exports.getAllProducts = (req, res) => {
 
   Product.find({}, (err, products) => {
     if (err) {
-      res.json({success: false, products: null, error: err});
+      res.json(null);
       return;
     };
     //get all products
-    res.json({success: true, products: products});
+    res.json(products);
   });
 };
 
