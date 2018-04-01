@@ -5,6 +5,7 @@ import mongoose = require('mongoose');
 import * as Promise from 'bluebird';
 import * as express from 'express';
 import * as indexRoute from './routes/index';
+import * as bodyParser from 'body-parser';
 
 class App {
 
@@ -15,14 +16,19 @@ class App {
     constructor() {
         this.express = express();
         this.middleware();
-        this.routes();
         this.config();
+        this.routes();
     }
     // config Express middleware
     private middleware(): void {}
 
     // Configure API endpoints.
     private routes(): void {
+
+        // use body parser so we can get info from POST and/or URL parameters
+        this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(bodyParser.json());
+
         const router = express.Router();
 
         // create routes
@@ -34,11 +40,15 @@ class App {
         // setup
         router.get('/setup', (req: express.Request, res: express.Response, next: express.NextFunction) => index.setup(req, res, next));
 
+        // route to authenticate a user
+        router.post('/authenticate', (req: express.Request, res: express.Response, next: express.NextFunction) => index.authenticate(req, res, next, this.express));
+
         this.express.use('/api', router);
     }
 
     public config() {
-        const MONGODB_CONNECTION: string = 'mongodb://localhost/phonecasestore';
+
+        const MONGODB_CONNECTION: string = process.env.MONGODB_CONNECTION;
         mongoose.Promise = Promise;
 
         // Get the default connection
