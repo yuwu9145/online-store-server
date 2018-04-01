@@ -8,12 +8,15 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const serverHelper = require('./server-helper');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const jwt = require('jsonwebtoken');
 const config = require('./config');
 const User = require('./app/models/user');
 
 const product_controller = require('./app/controllers/productController');
+const file_controller = require('./app/controllers/fileController');
 
 // =======================
 // configuration =========
@@ -142,6 +145,9 @@ apiRoutes.put('/product/:id/edit', product_controller.editProduct);
 
 /* GET request for removing a Product. */
 apiRoutes.delete('/product/:id/delete', product_controller.removeProduct);
+
+/* POST request for uploading files. */
+apiRoutes.post('/file/upload', upload.single('image'), file_controller.uploadFiles);
 
 app.use('/api', apiRoutes);
 
