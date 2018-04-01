@@ -9,5 +9,5 @@ server.on('listening', onListening);
 
 // function to note that Express is listening
 function onListening(): void {
-    console.log(`Listening on port ` + process.env.PORT);
+    console.log(`Listening on port ${process.env.PORT}`);
 }
