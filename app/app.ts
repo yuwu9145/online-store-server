@@ -5,6 +5,7 @@ import mongoose = require('mongoose');
 import * as Promise from 'bluebird';
 import * as express from 'express';
 import * as indexRoute from './routes/index';
+import * as productRoute from './routes/product';
 import * as bodyParser from 'body-parser';
 
 class App {
@@ -33,6 +34,7 @@ class App {
 
         // create routes
         const index: indexRoute.Index = new indexRoute.Index();
+        const product: productRoute.Index = new productRoute.Index();
 
         // index
         router.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => index.index(req, res, next));
@@ -42,6 +44,9 @@ class App {
 
         // route to authenticate a user
         router.post('/authenticate', (req: express.Request, res: express.Response, next: express.NextFunction) => index.authenticate(req, res, next, this.express));
+
+        /* GET request for getting all Product. */
+        router.get('/product/all', (req: express.Request, res: express.Response, next: express.NextFunction) => product.getAllProducts(req, res, next));
 
         this.express.use('/api', router);
     }
