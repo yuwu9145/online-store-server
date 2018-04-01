@@ -61,6 +61,9 @@ class App {
         /* DELETE request for removing a Product. */
         router.delete('/product/:id/delete', (req: express.Request, res: express.Response, next: express.NextFunction) => product.removeProduct(req, res, next));
 
+        /* POST request for uploading files. */
+        // apiRoutes.post('/file/upload', upload.single('image'), file_controller.uploadFiles);
+
         this.express.use('/api', router);
     }
 
