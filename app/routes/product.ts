@@ -6,7 +6,7 @@ import * as ShortUniqueId from 'short-unique-id';
 
 namespace Route {
     export class Routes {
-        uid;
+        private uid;
         constructor() {
             this.uid = new ShortUniqueId();
         }
@@ -59,6 +59,15 @@ namespace Route {
                     });
                 } else {
                     res.json({success: false, error: 'no product found to edit'});
+                }
+            });
+        }
+        public removeProduct(req: express.Request, res: express.Response, next: express.NextFunction) {
+            productSchema.Product.findByIdAndRemove(req.params.id, (err, product) => {
+                if (err) {
+                  res.json({success: false});
+                } else {
+                  res.json({success: true});
                 }
             });
         }
