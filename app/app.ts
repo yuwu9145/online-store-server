@@ -55,6 +55,9 @@ class App {
         /* POST request for creating Product. */
         router.post('/product/create', (req: express.Request, res: express.Response, next: express.NextFunction) => product.createProduct(req, res, next));
 
+        /* PUT request for editing a Product. */
+        router.put('/product/:id/edit', (req: express.Request, res: express.Response, next: express.NextFunction) => product.editProduct(req, res, next));
+
         this.express.use('/api', router);
     }
 

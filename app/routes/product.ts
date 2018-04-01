@@ -38,6 +38,30 @@ namespace Route {
                 res.json(instance);
             });
         }
+        public editProduct(req: express.Request, res: express.Response, next: express.NextFunction) {
+            productSchema.Product.findById(req.params.id, (err, product) => {
+                if (err) {
+                    res.json({success: false, product: undefined, error: err});
+                    return;
+                }
+
+                if (product) {
+                    product.name = req.body.name || product.name;
+                    product.description = req.body.description || product.description;
+                    product.price = req.body.price || product.price;
+                    product.images = req.body.images || product.images;
+                    // Save the updated document back to the database
+                    product.save((err, product) => {
+                    if (err) {
+                        res.json({success: false, error: err});
+                    }
+                    res.json({success: true, product: product});
+                    });
+                } else {
+                    res.json({success: false, error: 'no product found to edit'});
+                }
+            });
+        }
     }
 }
 
