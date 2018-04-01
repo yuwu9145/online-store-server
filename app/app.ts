@@ -52,6 +52,9 @@ class App {
         /* GET request for getting all Product. */
         router.get('/product/all', (req: express.Request, res: express.Response, next: express.NextFunction) => product.getAllProducts(req, res, next));
 
+        /* POST request for creating Product. */
+        router.post('/product/create', (req: express.Request, res: express.Response, next: express.NextFunction) => product.createProduct(req, res, next));
+
         this.express.use('/api', router);
     }
 
