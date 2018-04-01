@@ -4,7 +4,7 @@ import mongoose = require('mongoose');
 
 import * as Promise from 'bluebird';
 import * as express from 'express';
-import * as indexRoute from './routes/index';
+import * as commonRoutes from './routes/common';
 import * as productRoute from './routes/product';
 import * as bodyParser from 'body-parser';
 
@@ -33,17 +33,21 @@ class App {
         const router = express.Router();
 
         // create routes
-        const index: indexRoute.Index = new indexRoute.Index();
-        const product: productRoute.Index = new productRoute.Index();
+        const commomRoutes: commonRoutes.Routes = new commonRoutes.Routes();
+        const middlewares: commonRoutes.Middlewares = new commonRoutes.Middlewares();
+        const product: productRoute.Routes = new productRoute.Routes();
 
         // index
-        router.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => index.index(req, res, next));
+        router.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => commomRoutes.index(req, res, next));
 
         // setup
-        router.get('/setup', (req: express.Request, res: express.Response, next: express.NextFunction) => index.setup(req, res, next));
+        router.get('/setup', (req: express.Request, res: express.Response, next: express.NextFunction) => commomRoutes.setup(req, res, next));
 
         // route to authenticate a user
-        router.post('/authenticate', (req: express.Request, res: express.Response, next: express.NextFunction) => index.authenticate(req, res, next, this.express));
+        router.post('/authenticate', (req: express.Request, res: express.Response, next: express.NextFunction) => commomRoutes.authenticate(req, res, next, this.express));
+
+        // route middleware to verify a token
+        router.use((req, res, next) => middlewares.verifyToken(req, res, next));
 
         /* GET request for getting all Product. */
         router.get('/product/all', (req: express.Request, res: express.Response, next: express.NextFunction) => product.getAllProducts(req, res, next));

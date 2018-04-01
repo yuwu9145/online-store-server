@@ -4,7 +4,7 @@ import * as express from 'express';
 import * as productSchema from '../schemas/product';
 
 namespace Route {
-    export class Index {
+    export class Routes {
         public getAllProducts(req: express.Request, res: express.Response, next: express.NextFunction) {
             productSchema.Product.find({}, (err, products) => {
                 if (err) {
