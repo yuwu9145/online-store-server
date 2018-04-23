@@ -41,6 +41,9 @@ class App {
         const product: productRoute.Routes = new productRoute.Routes();
         const file: fileRoute.Routes = new fileRoute.Routes();
 
+        // route middleware to allow CORS
+        router.use((req, res, next) => middlewares.allowCrossDomain(req, res, next));
+
         // index
         router.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => commomRoutes.index(req, res, next));
 
