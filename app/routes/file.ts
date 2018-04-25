@@ -8,15 +8,17 @@ namespace Route {
     export class Routes {
         public upload(req: express.Request, res: express.Response, next: express.NextFunction) {
             let filename: string = req.file.originalname;
+            let res_filename: string = undefined;
+
             const fileExtension: string = path.extname(filename);
             filename = `${filename.replace(fileExtension, '')}_${new Date().getTime()}` + fileExtension;
             fileHelper.saveFile(filename, req.file.buffer).subscribe(
-                x => console.log('saving file observable onNext: %s', x),
+                x => res_filename = x,
                 e => res.json({
                     success: false,
                     message: e
                 }),
-                () => res.json({success: true})
+                () => res.json({filename: res_filename})
             );
         }
     }
