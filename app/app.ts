@@ -63,7 +63,10 @@ class App {
         router.post('/product/create', (req: express.Request, res: express.Response, next: express.NextFunction) => product.createProduct(req, res, next));
 
         /* PUT request for editing a Product. */
-        router.put('/product/:id/edit', (req: express.Request, res: express.Response, next: express.NextFunction) => product.editProduct(req, res, next));
+        router.put('/product/:id/edit', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+            console.log('----------here----ate---------', JSON.stringify(req.body));
+            product.editProduct(req, res, next);
+        });
 
         /* DELETE request for removing a Product. */
         router.delete('/product/:id/delete', (req: express.Request, res: express.Response, next: express.NextFunction) => product.removeProduct(req, res, next));
