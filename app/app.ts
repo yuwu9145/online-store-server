@@ -64,7 +64,6 @@ class App {
 
         /* PUT request for editing a Product. */
         router.put('/product/:id/edit', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            console.log('----------here----ate---------', JSON.stringify(req.body));
             product.editProduct(req, res, next);
         });
 

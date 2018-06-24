@@ -9,10 +9,10 @@ namespace FileHelper {
         filename = sanitizeFilename(filename);
         return Observable.create((observer: Observer<any>) => {
             observer.next(filename);
-            // fs.writeFile(`${process.env.UPLOAD_FILES_PATH}/${filename}`, buffer, (err) => {
-            //     if (err) observer.error(err);
-            //     observer.complete();
-            // });
+            fs.writeFile(`${process.env.UPLOAD_FILES_PATH}/${filename}`, buffer, (err) => {
+                if (err) observer.error(err);
+                observer.complete();
+            });
             observer.complete();
         });
     }
