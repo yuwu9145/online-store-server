@@ -11,7 +11,7 @@ module.exports = {
       script    : './dist/main.js',
       env: {
         PORT: 3000,
-        MONGODB_CONNECTION: 'mongodb://localhost/phonecasestore',
+        MONGODB_CONNECTION: 'mongodb://13.210.159.104/phonecasestore',
         TOKEN_SECRET: 'ilovescotchyscotch',
         UPLOAD_FILES_PATH: './dist/uploads'
       },
