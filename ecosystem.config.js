@@ -19,7 +19,7 @@ module.exports = {
       env_production : {
         NODE_ENV: 'production',
         PORT: 3000,
-        MONGODB_CONNECTION: 'mongodb://mongo/phonecasestore',
+        MONGODB_CONNECTION: 'mongodb://13.210.159.104/phonecasestore',
         TOKEN_SECRET: 'ilovescotchyscotch',
         UPLOAD_FILES_PATH: './dist/uploads'
       }
