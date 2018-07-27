@@ -1,5 +1,5 @@
 import * as http from 'http';
-import App from './App';
+import App from './app';
 
 App.set('port', process.env.PORT);
 

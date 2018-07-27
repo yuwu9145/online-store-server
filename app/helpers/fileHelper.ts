@@ -13,6 +13,7 @@ namespace FileHelper {
                 if (err) observer.error(err);
                 observer.complete();
             });
+            observer.complete();
         });
     }
 }

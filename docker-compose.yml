@@ -1,0 +1,17 @@
+version: "2"
+services:
+  app:
+    container_name: phonecase-pm2-app
+    restart: always
+    image: 350194335563.dkr.ecr.ap-southeast-2.amazonaws.com/phonecase-pm2-server:latest
+    ports:
+      - "3000:3000"
+    mem_limit: 100000
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    mem_limit: 100000
+    ports:
+      - "27017:27017"
