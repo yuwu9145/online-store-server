@@ -82,11 +82,7 @@ class App {
         mongoose.Promise = Promise;
 
         // Get the default connection
-        mongoose.connect(MONGODB_CONNECTION, {
-            useMongoClient: true,
-            user: process.env.MONGODB_DB_USERNAME,
-            pass: process.env.MONGODB_DB_PWD,
-        }, (err) => {
+        mongoose.connect(MONGODB_CONNECTION, {useMongoClient: true}, (err) => {
             if (err) {
                 console.log(err.message);
                 console.log(err);
