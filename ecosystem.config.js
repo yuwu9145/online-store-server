@@ -12,14 +12,14 @@ module.exports = {
       env: {
         NODE_ENV: 'development',
         PORT: 3000,
-        MONGODB_CONNECTION: 'mongodb://localhost/phonecasestore',
+        MONGODB_CONNECTION: 'mongodb://13.236.73.43/phonecasestore',
         TOKEN_SECRET: 'ilovescotchyscotch',
         UPLOAD_FILES_PATH: './dist/uploads'
       },
       env_production : {
         NODE_ENV: 'production',
         PORT: 8080,
-        MONGODB_CONNECTION: 'mongodb://localhost/phonecasestore',
+        MONGODB_CONNECTION: 'mongodb://172.31.14.155/phonecasestore',
         TOKEN_SECRET: 'ilovescotchyscotch',
         UPLOAD_FILES_PATH: './dist/uploads'
       }
