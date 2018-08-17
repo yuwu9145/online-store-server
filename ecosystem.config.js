@@ -12,9 +12,8 @@ module.exports = {
       env: {
         NODE_ENV: 'development',
         PORT: 3000,
-        MONGODB_CONNECTION: 'mongodb://13.236.73.43/phonecasestore',
+        MONGODB_CONNECTION: 'mongodb://admin:123@13.236.73.43/phonecasestore',
         TOKEN_SECRET: 'ilovescotchyscotch',
-        UPLOAD_FILES_PATH: './dist/uploads'
       },
       env_production : {
         NODE_ENV: 'production',
