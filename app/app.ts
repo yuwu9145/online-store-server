@@ -53,11 +53,11 @@ class App {
         // route to authenticate a user
         router.post('/authenticate', (req: express.Request, res: express.Response, next: express.NextFunction) => commomRoutes.authenticate(req, res, next, this.express));
 
-        // route middleware to verify a token
-        router.use((req, res, next) => middlewares.verifyToken(req, res, next));
-
         /* GET request for getting all Product. */
         router.get('/product/all', (req: express.Request, res: express.Response, next: express.NextFunction) => product.getAllProducts(req, res, next));
+
+        // route middleware to verify a token
+        router.use((req, res, next) => middlewares.verifyToken(req, res, next));
 
         /* POST request for creating Product. */
         router.post('/product/create', (req: express.Request, res: express.Response, next: express.NextFunction) => product.createProduct(req, res, next));

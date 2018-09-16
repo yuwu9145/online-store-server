@@ -11,8 +11,8 @@ module.exports = {
       script    : './dist/main.js',
       env: {
         NODE_ENV: 'development',
-        PORT: 3000,
-        MONGODB_CONNECTION: 'mongodb://admin:123@13.236.73.43/phonecasestore?authSource=admin',
+        PORT: 9000,
+        MONGODB_CONNECTION: 'mongodb://localhost/phonecasestore',
         MONGODB_DB_USERNAME: 'admin',
         MONGODB_DB_PWD: '123',
         TOKEN_SECRET: 'ilovescotchyscotch',
